@@ -29,7 +29,7 @@ const AllProducts: NextPage<Props> = ({ products, metadata }) => {
   const { addToast } = useToasts();
   const { theme } = useTheme();
   const [userType, setUserType] = useState("customer");
-  const [sortText, setSortText] = useState("Sếp theo");
+  const [sortText, setSortText] = useState("Sắp xếp");
   const router = useRouter();
 
   const {
@@ -75,9 +75,9 @@ const AllProducts: NextPage<Props> = ({ products, metadata }) => {
               if (e) {
                 setSortText(
                   e === "-avgRating"
-                    ? "Rating"
+                    ? "Lượt Thích"
                     : e === "-createdAt"
-                    ? "Latest"
+                    ? "Mới nhất"
                     : "Sort By"
                 );
                 delete router.query.offset;
@@ -90,13 +90,13 @@ const AllProducts: NextPage<Props> = ({ products, metadata }) => {
             }}
           >
             <Dropdown.Item href="#" eventKey="-avgRating">
-              Rating
+              Lượt thích
             </Dropdown.Item>
             <Dropdown.Item href="#" eventKey="-createdAt">
-              Latest
+              Mới nhất
             </Dropdown.Item>
             <Dropdown.Item href="#" eventKey="">
-              Reset
+              Bỏ xếp
             </Dropdown.Item>
           </DropdownButton>
           {userType === "admin" && (
@@ -109,11 +109,11 @@ const AllProducts: NextPage<Props> = ({ products, metadata }) => {
         </Col>
       </Row>
       <Row>
-        <Col sm={2}>
+        <Col sm={2} className="mt-2">
           <ProductFilter />
         </Col>
         <Col sm={10}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-2">
             {products && products.length > 0 ? (
               products.map((product) => (
                 <ProductItem
@@ -123,7 +123,7 @@ const AllProducts: NextPage<Props> = ({ products, metadata }) => {
                 />
               ))
             ) : (
-              <h1>No Products</h1>
+              <h1 className="col-span-6">Không có sản phẩm</h1>
             )}
           </div>
         </Col>

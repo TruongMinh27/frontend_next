@@ -21,7 +21,7 @@ const ProductFilter = () => {
             onSelect={(e) => {
               if (e) {
                 setFilterCatText(
-                  e.includes("Application") ? "Applications" : "OS"
+                  e.includes("Application") ? "Âm thanh" : "Mixing"
                 );
                 delete router.query.offset;
                 router.query.category = e;
@@ -33,13 +33,13 @@ const ProductFilter = () => {
             }}
           >
             <Dropdown.Item href="#" eventKey="">
-              Select category
+              Chọn danh mục
             </Dropdown.Item>
             <Dropdown.Item href="#" eventKey="Operating System">
-              Operating System
+              Mixing
             </Dropdown.Item>
             <Dropdown.Item href="#" eventKey="Application Software">
-              Application Software
+              Âm thanh
             </Dropdown.Item>
           </DropdownButton>
         </ListGroup.Item>
@@ -62,7 +62,7 @@ const ProductFilter = () => {
             }}
           >
             <Dropdown.Item href="#" eventKey="">
-              Select platform
+              Chọn danh mục
             </Dropdown.Item>
             <Dropdown.Item href="#" eventKey="Windows">
               Windows

@@ -15,7 +15,7 @@ import NumericInput from "react-numeric-input";
 import { BagCheckFill, PersonFill } from "react-bootstrap-icons";
 import { Tab } from "react-bootstrap";
 import { Table } from "react-bootstrap";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartOffCanvas from "../../components/CartOffCanvas";
 import axios from "axios";
 import SkuDetailsList from "../../components/Product/SkuDetailsList";
@@ -27,6 +27,8 @@ import { ProductDetail } from "../../model";
 import { Rate } from "antd";
 import formatNumber from "react-format-number-shorten";
 import CustomButton from "../../components/Custom/CustomButton";
+import { Products } from "../../services/product.service";
+import { useToasts } from "react-toast-notifications";
 
 interface ProductProps {
   product: Record<string, any>;
@@ -35,6 +37,8 @@ interface ProductProps {
 
 const Product: NextPage<ProductProps> = ({ product, relatedProducts }) => {
   const [show, setShow] = useState(false);
+  const [licenses, setLicenses] = React.useState([]);
+
   const [allSkuDetails, setAllSkuDetails] = React.useState(
     product?.skuDetails || []
   );
@@ -76,6 +80,39 @@ const Product: NextPage<ProductProps> = ({ product, relatedProducts }) => {
     });
     setShow(true);
   };
+  const { addToast } = useToasts();
+
+  const fetchAllLicenses = async (productId: string, skuId: string) => {
+    try {
+      const licensesRes = await Products.getLicenses(productId, skuId);
+      if (!licensesRes.success) {
+        throw new Error(licensesRes.message);
+      }
+      setLicenses(licensesRes?.result);
+    } catch (error: any) {
+      if (error.response) {
+        if (Array.isArray(error.response?.data?.message)) {
+          return error.response.data.message.forEach((message: any) => {
+            addToast(message, { appearance: "error", autoDismiss: true });
+          });
+        } else {
+          return addToast(error.response.data.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        }
+      }
+      addToast(error.message, { appearance: "error", autoDismiss: true });
+    }
+  };
+
+  // useEffect(() => {
+  //   product.skuDetails.map((item: any, index: number) =>
+  //     fetchAllLicenses(product._id, item._id)
+  //   );
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   return (
     <div className=" max-sm:mx-3 md:mx-3 lg:mx-32 my-32 dark:bg-jacata">
       <Row className="firstRow pt-20  ">

@@ -38,7 +38,7 @@ const MyAccount = () => {
       });
       await Users.logoutUser();
       localStorage.removeItem("_digi_user");
-      addToast("Logout Successful", {
+      addToast("Đăng xuất thành công", {
         appearance: "success",
         autoDismiss: true,
       });

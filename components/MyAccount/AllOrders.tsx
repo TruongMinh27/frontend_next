@@ -10,6 +10,9 @@ import {
 } from "react-bootstrap";
 import { useToasts } from "react-toast-notifications";
 import { Orders } from "../../services/order.service";
+import moment from "moment";
+import { Calendar, Clock } from "react-bootstrap-icons";
+import formatNumber from "react-format-number-shorten";
 
 const AllOrders = () => {
   const { addToast } = useToasts();
@@ -61,7 +64,7 @@ const AllOrders = () => {
             - Tất cả -
           </Dropdown.Item>
           <Dropdown.Item href="#" eventKey="pending">
-            Đang xử lý
+            Chưa hoàn thành
           </Dropdown.Item>
           <Dropdown.Item href="#" eventKey="completed">
             Hoàn thành
@@ -87,14 +90,28 @@ const AllOrders = () => {
                     {order.orderId}
                   </td>
                 </Link>
-                <td>{dateTOLocal(order.orderDate)}</td>
                 <td>
-                  <Badge>{order.orderStatus.toUpperCase()}</Badge>
+                  <div className="flex items-center">
+                    <Calendar className="mr-2" />
+
+                    {moment(order.createdAt).format("DD-MM-YYYY")}
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="mr-2" />
+                    {moment(order.createdAt).format("HH:mm")}
+                  </div>
                 </td>
-                <td>₹{order.paymnetInfo.paymentAmount} </td>
+                <td>
+                  <Badge>
+                    {order.orderStatus === "completed"
+                      ? "HOÀN THÀNH"
+                      : "CHƯA HOÀN THÀNH"}
+                  </Badge>
+                </td>
+                <td>{formatNumber(order.paymentInfo?.paymentAmount)}VND </td>
                 <td>
                   <Link href={`/orders/${order._id}`}>
-                    <Button variant="outline-dark">View Order Details</Button>
+                    <Button variant="outline-dark">Xem chi tiết</Button>
                   </Link>
                 </td>
               </tr>

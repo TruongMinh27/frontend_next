@@ -52,12 +52,12 @@ const ReviewSection: FC<IProps> = ({ reviews, productId }) => {
       setReviewFrom(intialState);
     } catch (error: any) {
       if (error.response) {
-        if (Array.isArray(error.response?.data?.message)) {
+        if (Array.isArray(error.response?.data?.errorResponse.message)) {
           return error.response.data.message.forEach((message: any) => {
             addToast(message, { appearance: "error", autoDismiss: true });
           });
         } else {
-          return addToast(error.response.data.message, {
+          return addToast(error.response.data.errorResponse.message, {
             appearance: "error",
             autoDismiss: true,
           });
@@ -81,19 +81,28 @@ const ReviewSection: FC<IProps> = ({ reviews, productId }) => {
       setFilteredReviews(delProdRes.result.feedbackDetails);
       setReviewFrom(intialState);
     } catch (error: any) {
+      console.log(error.response);
       if (error.response) {
         if (Array.isArray(error.response?.data?.message)) {
-          return error.response.data.message.forEach((message: any) => {
-            addToast(message, { appearance: "error", autoDismiss: true });
-          });
+          return error.response.data.errorResponse.message.forEach(
+            (message: any) => {
+              addToast(message, {
+                appearance: "error",
+                autoDismiss: true,
+              });
+            }
+          );
         } else {
-          return addToast(error.response.data.message, {
+          return addToast(error.response.data.errorResponse.message, {
             appearance: "error",
             autoDismiss: true,
           });
         }
       }
-      addToast(error.message, { appearance: "error", autoDismiss: true });
+      addToast(error.message, {
+        appearance: "error",
+        autoDismiss: true,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -235,7 +244,7 @@ const ReviewSection: FC<IProps> = ({ reviews, productId }) => {
             </Card.Body>
           </Card>
         ))}
-        {allReviews.length < 1 && <h5>No reviews</h5>}
+        {allReviews.length < 1 && <h5>Chưa đánh giá</h5>}
       </div>
     </div>
   );

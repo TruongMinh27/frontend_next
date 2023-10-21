@@ -94,7 +94,7 @@ const TopHead = () => {
       });
       await Users.logoutUser();
       localStorage.removeItem("_digi_user");
-      addToast("Logout Successful", {
+      addToast("Đăng xuất thành công", {
         appearance: "success",
         autoDismiss: true,
       });
@@ -293,29 +293,29 @@ const TopHead = () => {
         <div className="flex justify-between items-center space-x-2 !text-black dark:!text-white">
           <div className="flex justify-around item-center space-x-10  max-md:hidden md:hidden lg:flex">
             <button
-              onClick={() => "/cua-hang"}
+              onClick={() => router.push("/products")}
               className=" whitespace-nowrap font-display font-bold text-lg hover:!text-primary cursor-pointer"
             >
               Cửa hàng
             </button>
-            <button
+            {/* <button
               onClick={() => "/danh-muc"}
               className=" whitespace-nowrap font-display font-bold text-lg hover:!text-primary cursor-pointer"
-            >
-              Danh mục
-            </button>
-            <button
+            > */}
+            {/* Danh mục */}
+            {/* </button> */}
+            {/* <button
               onClick={() => "/beat"}
               className=" whitespace-nowrap font-display font-bold text-lg hover:!text-primary cursor-pointer"
-            >
-              Beat
-            </button>
+            > */}
+            {/* Beat */}
+            {/* </button>
             <button
               onClick={() => "/tin-tuc"}
               className=" whitespace-nowrap font-display font-bold text-lg hover:!text-primary cursor-pointer"
-            >
-              Tin tức
-            </button>
+            > */}
+            {/* Tin tức */}
+            {/* </button> */}
             <div className=" whitespace-nowrap font-display font-bold text-lg hover:!text-primary cursor-pointer"></div>
           </div>
           <div className="items-center space-x-2 max-md:hidden md:hidden lg:flex">

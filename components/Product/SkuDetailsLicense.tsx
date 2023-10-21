@@ -213,36 +213,39 @@ const SkuDetailsLicense: FC<ISkuDetailsLicenseProps> = ({
       )}
 
       <div>Danh sách key:</div>
-      <ListGroup className="licenceLists">
+      <ListGroup className="licenceLists ">
         {licenses.length > 0 ? (
           licenses.map((license: any, index: number) => (
-            <ListGroup.Item key={index}>
-              <Badge bg="info">{license.licenseKey}</Badge>{" "}
-              <span
-                className="editLBtn"
-                onClick={() => {
-                  setLicenseIdForUpdate(license._id);
-                  setLicenseKey(license.licenseKey);
-                  setAddFormShow(true);
-                }}
-              >
-                <Pen />
-              </span>
-              <span
-                className="delLBtn"
-                onClick={() => deleteLicense(license._id)}
-              >
-                {isLoadingForDelete.status &&
-                isLoadingForDelete.id === license._id ? (
-                  <span
-                    className="spinner-border spinner-border-sm mr-2"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                ) : (
-                  <Archive />
-                )}
-              </span>
+            <ListGroup.Item key={index} className="flex">
+              <Badge bg="info">{license.licenseKey}</Badge>
+              {license?.isSold ? " Đã bán" : ""}
+              <div className="flex">
+                <span
+                  className="editLBtn "
+                  onClick={() => {
+                    setLicenseIdForUpdate(license._id);
+                    setLicenseKey(license.licenseKey);
+                    setAddFormShow(true);
+                  }}
+                >
+                  <Pen />
+                </span>
+                <span
+                  className="delLBtn"
+                  onClick={() => deleteLicense(license._id)}
+                >
+                  {isLoadingForDelete.status &&
+                  isLoadingForDelete.id === license._id ? (
+                    <span
+                      className="spinner-border spinner-border-sm mr-2"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  ) : (
+                    <Archive />
+                  )}
+                </span>
+              </div>
             </ListGroup.Item>
           ))
         ) : (
@@ -255,7 +258,7 @@ const SkuDetailsLicense: FC<ISkuDetailsLicenseProps> = ({
                     role="status"
                     aria-hidden="true"
                   ></span>{" "}
-                  <span>Loading...</span>
+                  <span>Đang tải...</span>
                 </>
               ) : (
                 "Không tìm thấy key"

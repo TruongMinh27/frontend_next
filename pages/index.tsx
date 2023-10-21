@@ -33,16 +33,15 @@ const Home: NextPage<Props> = ({ products }) => {
         <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-12 h-full ">
           <div className="col-span-6 md:col-span-4 lg:col-span-6 lg:my-40 lg:px-14 lg:ml-20 mt-28 text-center lg:text-left lg:mt-52 flex items-center flex-col ">
             <h1 className="font-display font-bold lg:text-5xl text-base text-center lg:text-left dark:!text-white text-black  capitalize lg:leading-[60px] ">
-              thiết bị âm thanh và bản quyền âm nhạc
+              VST Plugin Dành Cho Music Producer
             </h1>
             <p className="text-black dark:!text-zinc-400 font-semibold my-1 lg:my-6 text-sm lg:text-lg">
-              Chúng hân hạnh là nhà cung cấp thiết bị âm thanh chất lượng cao và
-              sở hữu bản quyền của nhiều thể loại nhạc thịnh hành trên thị
-              trường.
+              Chúng hân hạnh là nhà cung cấp VST plugin chất lượng cao và sở hữu
+              bản quyền của nhiều VST Plugin thịnh hành trên thị trường.
             </p>
             <div className="grid grid-cols-2 lg:col-span-6 gap-4 mt-4 lg:mt-0 md:col-span-4">
               <CustomButton
-                onClick={() => ""}
+                onClick={() => Router.push("/products")}
                 className="w-32 col-span-2 lg:col-span-1"
                 type="primary"
               >
@@ -52,7 +51,7 @@ const Home: NextPage<Props> = ({ products }) => {
                 className="w-32 col-span-2 lg:col-span-1"
                 type="text"
               >
-                Nghe nhạc
+                Nhận ưu đãi
               </CustomButton>
             </div>
           </div>
@@ -62,7 +61,7 @@ const Home: NextPage<Props> = ({ products }) => {
           </div>
         </div>
       </div>
-      <div className="mx-4 lg:mx-32 dark:!bg-jacata dark:!text-white">
+      <div className="max-mx-4 lg:mx-32 xl:mx-32 dark:!bg-jacata dark:!text-white">
         <h3 className={`${styles.productCats} dark:!text-white `}>
           Sản phẩm mới
         </h3>

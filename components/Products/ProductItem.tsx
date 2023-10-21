@@ -207,7 +207,11 @@ const ProductItem: FC<IProductItemProps> = ({ userType, product }) => {
             </div>
           ) : (
             <Link href={`/products/${product?._id}`}>
-              <CustomButton className="float-right" type="text" icon={<Eye />}>
+              <CustomButton
+                className="float-right mt-2"
+                type="text"
+                icon={<Eye />}
+              >
                 Chi tiết
               </CustomButton>
             </Link>
